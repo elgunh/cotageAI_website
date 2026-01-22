@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* ============================================
+   COTAGE AI - Light Mode iOS Glass Design System
+   ============================================ */
+
+:root {
+  /* Base backgrounds - LIGHT MODE */
+  --bg-base: #ffffff;
+  --bg-base-rgb: 255, 255, 255;
+  --bg-gradient-subtle: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+
+  /* Glass tokens - LIGHT MODE with iOS-style frosted glass */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-border-strong: rgba(0, 0, 0, 0.10);
+  --glass-border-light: rgba(255, 255, 255, 0.4);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+
+  /* Shadows - softer for light mode */
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-deep: 0 12px 40px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 40px rgba(47, 177, 165, 0.12);
+  --shadow-inner: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+
+  /* Typography - DARK TEXT for light mode */
+  --text-primary: hsla(220, 15%, 15%, 0.95);
+  --text-secondary: hsla(220, 12%, 35%, 0.85);
+  --text-muted: hsla(220, 10%, 50%, 0.75);
+
+  /* Accent (teal - keeping vibrant colors) */
+  --accent-600: #2fb1a5;
+  --accent-500: #5ecfc3;
+  --accent-400: #61d1c5;
+  --accent-300: #8ee0d7;
+  --accent-200: #b8ece6;
+  --accent-100: #e3f8f6;
+
+  /* Gradient for primary buttons */
+  --gradient-primary: linear-gradient(135deg, #2fb1a5 0%, #61d1c5 100%);
+
+  /* Spacing */
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Blur values - iOS-style */
+  --blur-glass: 24px;
+  --blur-glass-strong: 32px;
+  --blur-glass-subtle: 16px;
+
+  /* Saturation for backdrop */
+  --saturate-glass: 180%;
+  --saturate-glass-strong: 200%;
+  --saturate-glass-subtle: 150%;
+}
+
+@theme inline {
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Custom colors for Tailwind */
+  --color-accent-600: var(--accent-600);
+  --color-accent-500: var(--accent-500);
+  --color-accent-400: var(--accent-400);
+  --color-accent-300: var(--accent-300);
+
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+}
+
+/* -------------------- Base Styles -------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-base);
+  background-image: var(--bg-gradient-subtle);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="3.5" numOctaves="4" /%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" /%3E%3C/svg%3E');
+  z-index: -1;
+}
+
+/* -------------------- Glass Utilities -------------------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-glass)) saturate(var(--saturate-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(var(--saturate-glass));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft), var(--shadow-inner);
+  position: relative;
+  overflow: hidden;
+}
+
+/* iOS-style specular highlight */
+.glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.8;
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--blur-glass-strong)) saturate(var(--saturate-glass-strong));
+  -webkit-backdrop-filter: blur(var(--blur-glass-strong)) saturate(var(--saturate-glass-strong));
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: var(--shadow-deep), var(--shadow-inner);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-strong::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.9;
+}
+
+.glass-subtle {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--blur-glass-subtle)) saturate(var(--saturate-glass-subtle));
+  -webkit-backdrop-filter: blur(var(--blur-glass-subtle)) saturate(var(--saturate-glass-subtle));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+/* -------------------- Fallback for unsupported browsers -------------------- */
+@supports not (backdrop-filter: blur(1px)) {
+
+  .glass,
+  .glass-strong,
+  .glass-subtle {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* -------------------- Text Gradient -------------------- */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* -------------------- Scrollbar -------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* -------------------- Selection -------------------- */
+::selection {
+  background-color: rgba(95, 207, 195, 0.25);
+  color: var(--text-primary);
+}
+
+/* -------------------- Focus States -------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent-500);
+  outline-offset: 2px;
+}
+
+/* -------------------- Reduced Motion -------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
